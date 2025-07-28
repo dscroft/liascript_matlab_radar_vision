@@ -6,30 +6,9 @@ language: en
 narrator: US English Male
 
 classroom: false
-icon: https://dscroft.github.io/liascript_materials/assets/logo.svg
 
-import: https://dscroft.github.io/liascript_materials/assets/utils.md
+import: http://localhost:8000/assets/macros.md
 
-@style
-.flex-container {
-    display: flex;
-    flex-wrap: wrap; /* Allows the items to wrap as needed */
-    align-items: stretch;
-    gap: 20px; /* Adds both horizontal and vertical spacing between items */
-}
-
-.flex-child { 
-    flex: 1;
-    margin-right: 20px; /* Adds space between the columns */
-}
-
-@media (max-width: 600px) {
-    .flex-child {
-        flex: 100%; /* Makes the child divs take up the full width on slim devices */
-        margin-right: 0; /* Removes the right margin */
-    }
-}
-@end
 -->
 
 # Matlab Tutorial: Sensor and ADAS toolbox
@@ -132,56 +111,124 @@ parameters, or click and drag
 the actor in the canvas to
 move the starting position
 
-10
 
 ### Adding Waypoints
 
-- Right click the actor to add
-waypoint on the canvas
+Right click the actor to add waypoint on the canvas.
 
-- Alternatively use the buttons
-next to trajectory on the left
+- Alternatively use the buttons next to trajectory on the left.
 
-- You can fine tune and edit
+![](media/images/add_actor_waypoints.png "Adding Waypoints")
 
-points through the table on
-the left or clicking and
-dragging the waypoint
+You can fine tune and edit points through the table on the left.
 
-11
+- Or clicking and dragging the waypoint in the Scenario Canvas.
+
+
 
 ### Editing Speed through Waypoints
 
-- Edit speed
+Edit speed through each waypoint through the Trajectory section of each actors properties.
 
-through each
-waypoint through
-the table
+- Matlab will interpolate the speed between waypoints to provide a smooth transition.
 
-- Additionally, a
-pause at the
-waypoint can be
-added
+- Additionally, a pause at the waypoint can be added if you need the actor to stop at a specific point.
 
-12
+![](media/images/adjust_actor_trajectory.png.png "Editing Speed through Waypoints")
+
+
+### Running the scenario
+
+To run the scenario to confirm that all actors are moving as expected, click the "Run" button at the top of the GUI.
+
+!?[](media/videos/run_scenario.mp4 "Scenario running")
+
+<div class = "important">
+<b style="color: rgb(var(--color-highlight));">Important note</b><br>
+
+Notice the simulation time in the bottom right corner of the Scenario Canvas (middle of the GUI).
+
+- Depending on the complexity of the scenario and the hardware specifications of the computer you are using, the simulation may run significantly slower than real time.
+- This can be adjusted in the SIMULATE settings at the top, most notably by increasing the Sample Time.
+
+  - But this comes at the cost of decreased simulation fidelity.
+
+Simulation time shows the time elapsed from the perspective of within the simulation, not the real world clock.
+When attempting to debug scenarios, especially delay times and velocities, it is important to keep this in mind.
+
+</div>
+
+### Saving/Exporting the scenario
+
+There are two files that we are concerned with when saving a driving scenario.
+
+1. The `.mat` file which contains the scenario data, including the actors, roads, and waypoints.
+2. The exported `.m` file which contains Matlab code equivalent of the scenario.
+   
+The `.m` file is where you will had added any data processing and analysis code.
+
+
+Saving
+------
+
+To save the scenario file, click the "Save" button at the top of the GUI.
+
+![](media/images/save_scenario.png "Saving the scenario")
+
+
+Exporting
+----------
+
+To export the scenario to a `.m` file, click the "Export" button at the top of the GUI.
+
+- Then select the "MATLAB function" option.
+
+![](media/images/export_scenario.png "Exporting the scenario")
+
+
+Once exported you should see the Matlab code in the main Matlab window.
+
+![](media/images/export_code.png "Exported Matlab code")
+
+
+
+
+## Task 2 - Adding Sensors
+
+### Add second actor
+
+Add a second actor to the scenario such as a truck.
+
+- This can be done by right clicking the scenario canvas and selecting "Add Actor" or using the "Add Actor" button at the top of the GUI.
+- A second actor is needed so that we have something for the sensors to detect.
+
+![](media/images/second_actor.png "Adding a second actor")
+
 
 ### Adding Sensors
 
-- Clicking the sensors to
-add will allow you to
-place the sensor on
-the ego vehicle
+Clicking the sensors options at the top of the GUI will allow you to add sensors to the ego vehicle.
 
-- The sensor parameters
-can be edited through
-the left side based on
-specification
+- By default the ego vehicle will be the first vehicle that you added to your scenario.
 
-13
+  - This can be changed in the actor properties on the left side of the GUI.
 
-### Viewing Scenario in GUI
+The sensor canvas will allow you to place sensors anywhere on the ego vehicle.
 
-14
+- For these tasks it is recommended that you use the standard pre-defined locations.
+
+The sensor parameters can be edited through using the Sensors tab on the left side of the GUI.
+
+![](media/images/add_radar.png "Adding Sensors")
+
+
+**Add a single Radar sensor to the front bumper of the ego vehicle.**
+
+### Running the scenario
+
+Run the scenario as before to see and confirm that the radar sensor is detecting the second actor.
+
+!?[](media/videos/radar_detection.mp4 "Radar detection in action")
 
 
 ## Task Radar 
